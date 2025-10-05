@@ -1,0 +1,11 @@
+{
+  "dataset_type": "placeholder",
+  "message": "Place your processed NASA datasets here",
+  "instructions": [
+    "1. Download NASA PSI datasets from https://psi.nasa.gov/",
+    "2. Save CSV files to preprocessing/raw_data/",
+    "3. Run: python preprocess_nasa_data.py --input raw_data/yourfile.csv --output ../src/data/processed.json --type [colloid|marangoni|capillary]",
+    "4. The processed JSON will appear here automatically"
+  ],
+  "sample_data_available": true
+}

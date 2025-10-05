@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluids in Space - Interactive Educational Tool</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/home.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="nav-icon">💧</span>
+                <span class="nav-title">Fluids in Space</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="simulation.html" class="nav-link">Simulation</a></li>
+                <li><a href="visualization.html" class="nav-link">Visualization</a></li>
+                <li><a href="learn-more.html" class="nav-link">Learn More</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="home">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-content fade-in">
+                        <h1 class="hero-title">
+                            Fluids in Space vs Earth
+                        </h1>
+                        <p class="hero-subtitle">
+                            An Interactive Educational Journey Through Microgravity
+                        </p>
+                        <p class="hero-description">
+                            Discover why water forms floating spheres in space and how astronauts handle fluids differently. 
+                            Compare Earth's gravity-driven behavior with the fascinating physics of microgravity environments.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="simulation.html" class="btn btn-primary">
+                                Start Simulation
+                            </a>
+                            <a href="learn-more.html" class="btn btn-secondary">
+                                Learn More
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="hero-visual">
+                        <div class="floating-droplet"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Different in Space Section -->
+            <section class="why-different">
+                <div class="container">
+                    <h2 class="section-title">Why Do Fluids Behave Differently in Space?</h2>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-card earth card">
+                            <h3>🌍 On Earth</h3>
+                            <ul>
+                                <li><strong>Gravity dominates:</strong> Fluids settle at the bottom of containers</li>
+                                <li><strong>Convection:</strong> Hot fluid rises, cold fluid sinks predictably</li>
+                                <li><strong>Surface tension:</strong> Secondary effect compared to gravity</li>
+                                <li><strong>Mixing:</strong> Density differences drive separation</li>
+                            </ul>
+                        </div>
+
+                        <div class="comparison-card space card">
+                            <h3>🚀 In Space</h3>
+                            <ul>
+                                <li><strong>Surface tension dominates:</strong> Fluids form perfect spheres</li>
+                                <li><strong>Marangoni convection:</strong> Surface tension gradients drive flow</li>
+                                <li><strong>No "up" or "down":</strong> Fluids don't settle</li>
+                                <li><strong>Self-assembly:</strong> Colloids organize into unique patterns</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+                <!-- Features Section -->
+            <section class="features">
+                <div class="container">
+                    <h2 class="section-title">Explore Interactive Features</h2>
+                    
+                    <div class="features-grid">
+                        <div class="feature-card card">
+                            <div class="feature-icon">💧</div>
+                            <h3>Fluid Behavior</h3>
+                            <p>Explore how liquids form perfect spheres in microgravity</p>
+                        </div>
+                        <div class="feature-card card">
+                            <div class="feature-icon">🧪</div>
+                            <h3>Colloids</h3>
+                            <p>Discover self-assembly patterns in colloidal suspensions</p>
+                        </div>
+                        <div class="feature-card card">
+                            <div class="feature-icon">📈</div>
+                            <h3>Marangoni Convection</h3>
+                            <p>Understand surface tension-driven flows in space</p>
+                        </div>
+                        <div class="feature-card card">
+                            <div class="feature-icon">🚀</div>
+                            <h3>Real NASA Data</h3>
+                            <p>Interactive visualizations from PSI experiments</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Concepts Section -->
+            <section class="key-concepts">
+                <div class="container">
+                    <h2 class="section-title">Key Scientific Concepts</h2>
+                    
+                    <div class="concepts-list">
+                        <div class="concept-item card">
+                            <h3>🔵 Surface Tension</h3>
+                            <p>
+                                In microgravity, surface tension becomes the dominant force. This causes liquids to 
+                                minimize their surface area and form spherical droplets, creating the iconic "water 
+                                balls" seen on the International Space Station.
+                            </p>
+                        </div>
+
+                        <div class="concept-item card">
+                            <h3>🌡️ Marangoni Convection</h3>
+                            <p>
+                                Named after Italian physicist Carlo Marangoni, this phenomenon occurs when surface 
+                                tension gradients (caused by temperature or concentration differences) drive fluid 
+                                flow. In space, this becomes the primary mechanism for heat and mass transfer.
+                            </p>
+                        </div>
+
+                        <div class="concept-item card">
+                            <h3>⚛️ Colloidal Self-Assembly</h3>
+                            <p>
+                                Colloids are mixtures where tiny particles (1-1000 nanometers) are suspended in a 
+                                fluid. In microgravity, without gravitational settling, these particles can 
+                                self-organize into crystal-like structures with applications in materials science.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta">
+                <div class="container">
+                    <div class="cta-content">
+                        <h2>Ready to Explore?</h2>
+                        <p>
+                            Use our interactive simulation to adjust gravity, temperature, and container 
+                            properties to see real-time changes in fluid behavior.
+                        </p>
+                        <a href="simulation.html" class="btn btn-primary btn-large">
+                            Launch Simulation
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Fluids in Space Educational Tool | NASA Space Apps Challenge</p>
+            <p>Built for educational purposes | Data from NASA Physical Sciences Informatics</p>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+</body>
+</html>

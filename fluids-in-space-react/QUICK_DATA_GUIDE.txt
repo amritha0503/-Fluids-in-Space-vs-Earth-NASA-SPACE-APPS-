@@ -1,0 +1,102 @@
+# 📊 QUICK START: Adding Your NASA Dataset
+
+## 🎯 In 3 Simple Steps
+
+### Step 1: Copy Your Data File Here ⬇️
+
+```
+📁 fluids-in-space-react
+  └── 📁 preprocessing
+      └── 📁 raw_data          ← PUT YOUR CSV FILE HERE!
+          └── your-nasa-data.csv
+```
+
+**Command:**
+```powershell
+Copy-Item "C:\path\to\your-nasa-data.csv" "preprocessing\raw_data\your-nasa-data.csv"
+```
+
+---
+
+### Step 2: Run This Command ⬇️
+
+```bash
+cd preprocessing
+python preprocess_nasa_data.py --input raw_data/your-nasa-data.csv --output ../src/data/processed.json --type marangoni
+```
+
+**Replace:**
+- `your-nasa-data.csv` with your actual filename
+- `marangoni` with your data type: `colloid`, `marangoni`, or `capillary`
+
+---
+
+### Step 3: See Your Data in the App! ⬇️
+
+```bash
+cd ..
+npm start
+```
+
+Then open: **http://localhost:3000/learn-more**
+
+Your data will appear in the charts! 📈
+
+---
+
+## 📋 What File Types?
+
+✅ **CSV files** (`.csv`)
+✅ **Excel files** (`.xlsx`) - convert to CSV first
+✅ **Tab-delimited** (`.txt`, `.tsv`) - save as CSV
+
+---
+
+## 🔍 Example Data Formats
+
+### Marangoni Data:
+```csv
+time,temperature,surface_tension
+0.0,20.0,72.8
+0.1,21.0,72.7
+0.2,22.0,72.6
+```
+
+### Colloid Data:
+```csv
+time,particle_id,x_position,y_position
+0.0,1,10.5,20.3
+0.0,2,11.2,21.1
+0.1,1,10.6,20.4
+```
+
+---
+
+## 🆘 Problems?
+
+**Error: "File not found"**
+→ Check file is in `preprocessing/raw_data/`
+
+**Error: "Column not found"**
+→ Check your CSV has the right column names
+
+**Need help with custom data?**
+→ See `DATASET_INTEGRATION_GUIDE.md`
+
+---
+
+## 📂 Directory Reminder
+
+```
+fluids-in-space-react/
+├── preprocessing/
+│   └── raw_data/              ← Step 1: PUT DATA HERE
+├── src/
+│   └── data/                  ← Step 2: PROCESSED DATA GOES HERE (auto)
+└── public/
+    └── resources/             ← (PDFs go here)
+```
+
+---
+
+**That's it! 3 steps and your NASA data is visualized! 🚀**

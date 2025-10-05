@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualization - Fluids in Space</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/visualization.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="nav-icon">💧</span>
+                <span class="nav-title">Fluids in Space</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="simulation.html" class="nav-link">Simulation</a></li>
+                <li><a href="visualization.html" class="nav-link active">Visualization</a></li>
+                <li><a href="learn-more.html" class="nav-link">Learn More</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="visualization-page">
+            <div class="container">
+                <!-- Header -->
+                <div class="page-header">
+                    <h1 class="section-title">Advanced Visualizations</h1>
+                    <p class="section-subtitle">Compare fluid behavior side-by-side: Earth vs Space</p>
+                </div>
+
+                <!-- Scenario Selector -->
+                <div class="scenario-selector card">
+                    <h2>Select Scenario</h2>
+                    <div class="scenario-grid">
+                        <button class="scenario-btn active" data-scenario="droplet">
+                            <h3>Water Droplet Formation</h3>
+                            <p>See how water forms perfect spheres in microgravity</p>
+                        </button>
+                        <button class="scenario-btn" data-scenario="convection">
+                            <h3>Marangoni Convection</h3>
+                            <p>Surface tension-driven flows in space</p>
+                        </button>
+                        <button class="scenario-btn" data-scenario="colloid">
+                            <h3>Colloid Self-Assembly</h3>
+                            <p>Particle organization without gravity</p>
+                        </button>
+                        <button class="scenario-btn" data-scenario="mixing">
+                            <h3>Fluid Mixing</h3>
+                            <p>Compare mixing behavior in gravity vs microgravity</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Visualization Controls -->
+                <div class="viz-controls">
+                    <button class="control-btn" id="playPauseBtn">
+                        <span class="btn-icon">⏸️</span>
+                        <span class="btn-text">Pause</span>
+                    </button>
+                    <button class="control-btn" id="resetBtn">
+                        <span class="btn-icon">🔄</span>
+                        <span class="btn-text">Reset</span>
+                    </button>
+                </div>
+
+                <!-- Main Visualization -->
+                <div class="main-visualization card">
+                    <div class="comparison-container">
+                        <div class="comparison-side">
+                            <h3>🌍 On Earth</h3>
+                            <canvas id="earthCanvas" width="400" height="400"></canvas>
+                        </div>
+                        <div class="comparison-side">
+                            <h3>🚀 In Space</h3>
+                            <canvas id="spaceCanvas" width="400" height="400"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Explanation Section (dynamically updated) -->
+                <div class="explanation-section">
+                    <div class="explanation-card card" id="explanationCard">
+                        <!-- Content will be dynamically inserted by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="additional-info card">
+                    <h2>Real-World Applications</h2>
+                    <div class="applications-grid">
+                        <div class="application-item">
+                            <h3>🛰️ Spacecraft Design</h3>
+                            <p>Understanding fluid behavior helps design better fuel tanks, water systems, and thermal management for spacecraft.</p>
+                        </div>
+                        <div class="application-item">
+                            <h3>🔬 Materials Science</h3>
+                            <p>Microgravity enables creation of unique materials and crystals impossible to produce on Earth.</p>
+                        </div>
+                        <div class="application-item">
+                            <h3>🧪 Pharmaceutical Research</h3>
+                            <p>Protein crystallization in space produces higher-quality samples for drug development.</p>
+                        </div>
+                        <div class="application-item">
+                            <h3>🌱 Life Support Systems</h3>
+                            <p>Managing water, air, and nutrients for long-term space habitation requires understanding microgravity fluids.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Fluids in Space Educational Tool | NASA Space Apps Challenge</p>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/visualization.js"></script>
+</body>
+</html>

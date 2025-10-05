@@ -1,0 +1,238 @@
+.simulation {
+  padding: 2rem 0 4rem;
+}
+
+.simulation-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.simulation-content {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Controls Panel */
+.controls-panel {
+  height: fit-content;
+  position: sticky;
+  top: 90px;
+}
+
+.controls-panel h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-blue);
+}
+
+.controls-panel h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Preset Section */
+.preset-section {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.preset-btn {
+  padding: 0.8rem;
+  background: rgba(0, 191, 255, 0.1);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  border-radius: 8px;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+  background: rgba(0, 191, 255, 0.2);
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+}
+
+/* Parameter Group */
+.parameter-group {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Fluid Type Selector */
+.fluid-type-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fluid-type-btn {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.fluid-type-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.fluid-type-btn.active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.fluid-color-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px currentColor;
+}
+
+/* Info Panel */
+.info-panel {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(0, 191, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 191, 255, 0.2);
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.info-value {
+  color: var(--accent-blue);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Visualization Panel */
+.visualization-panel {
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+.visualization-panel h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-blue);
+}
+
+.visualization-info {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(139, 92, 246, 0.05);
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-purple);
+}
+
+.visualization-info p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.visualization-info strong {
+  color: var(--accent-purple);
+}
+
+/* Education Notes */
+.education-notes {
+  margin-top: 2rem;
+}
+
+.education-notes h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.note-item {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.note-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(0, 191, 255, 0.3);
+  transform: translateY(-3px);
+}
+
+.note-item h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  color: white;
+}
+
+.note-item p {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .simulation-content {
+    grid-template-columns: 1fr;
+  }
+
+  .controls-panel {
+    position: relative;
+    top: 0;
+  }
+
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .preset-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .simulation {
+    padding: 1rem 0 2rem;
+  }
+}

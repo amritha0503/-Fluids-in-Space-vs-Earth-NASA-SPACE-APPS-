@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluid Simulation - Fluids in Space</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/simulation.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="nav-icon">💧</span>
+                <span class="nav-title">Fluids in Space</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="simulation.html" class="nav-link active">Simulation</a></li>
+                <li><a href="visualization.html" class="nav-link">Visualization</a></li>
+                <li><a href="learn-more.html" class="nav-link">Learn More</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="simulation">
+            <div class="container">
+                <!-- Header -->
+                <div class="simulation-header">
+                    <h1 class="section-title">Interactive Fluid Simulation</h1>
+                    <p class="section-subtitle">Adjust parameters to see how fluids behave differently in space versus on Earth</p>
+                </div>
+
+                <!-- Two-Column Layout: Controls + Visualization -->
+                <div class="simulation-content">
+                    <!-- Left: Controls Panel -->
+                    <div class="controls-panel card">
+                        <!-- Quick Presets -->
+                        <div class="preset-section">
+                            <h3>Quick Presets</h3>
+                            <div class="preset-buttons">
+                                <button class="preset-btn" data-preset="earth">
+                                    <span class="preset-icon">🌍</span>
+                                    <div>
+                                        <div class="preset-name">Earth</div>
+                                        <div class="preset-value">9.8 m/s²</div>
+                                    </div>
+                                </button>
+                                <button class="preset-btn" data-preset="moon">
+                                    <span class="preset-icon">🌙</span>
+                                    <div>
+                                        <div class="preset-name">Moon</div>
+                                        <div class="preset-value">1.62 m/s²</div>
+                                    </div>
+                                </button>
+                                <button class="preset-btn" data-preset="mars">
+                                    <span class="preset-icon">🔴</span>
+                                    <div>
+                                        <div class="preset-name">Mars</div>
+                                        <div class="preset-value">3.71 m/s²</div>
+                                    </div>
+                                </button>
+                                <button class="preset-btn" data-preset="iss">
+                                    <span class="preset-icon">🛰️</span>
+                                    <div>
+                                        <div class="preset-name">ISS</div>
+                                        <div class="preset-value">~0 m/s²</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Fluid Type Selector -->
+                        <div class="parameter-group">
+                            <h3>Fluid Type</h3>
+                            <div class="fluid-type-buttons">
+                                <button class="fluid-type-btn active" data-fluid="water">
+                                    <span class="fluid-indicator" style="background: #00bfff;"></span>
+                                    <span>Water</span>
+                                </button>
+                                <button class="fluid-type-btn" data-fluid="oil">
+                                    <span class="fluid-indicator" style="background: #ffa500;"></span>
+                                    <span>Oil</span>
+                                </button>
+                                <button class="fluid-type-btn" data-fluid="colloid">
+                                    <span class="fluid-indicator" style="background: #8b5cf6;"></span>
+                                    <span>Colloid</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Parameter Sliders -->
+                        <div class="parameter-group">
+                            <label class="parameter-label">
+                                <span>Gravity</span>
+                                <span class="parameter-value"><span id="gravityValue">9.8</span> m/s²</span>
+                            </label>
+                            <input type="range" id="gravity" class="parameter-slider" 
+                                   min="0" max="10" step="0.1" value="9.8">
+                            <p class="parameter-description">Controls how strongly objects are pulled downward</p>
+                        </div>
+
+                        <div class="parameter-group">
+                            <label class="parameter-label">
+                                <span>Temperature</span>
+                                <span class="parameter-value"><span id="temperatureValue">25</span>°C</span>
+                            </label>
+                            <input type="range" id="temperature" class="parameter-slider" 
+                                   min="0" max="100" step="1" value="25">
+                            <p class="parameter-description">Affects molecular movement and energy</p>
+                        </div>
+
+                        <div class="parameter-group">
+                            <label class="parameter-label">
+                                <span>Container Size</span>
+                                <span class="parameter-value"><span id="containerSizeValue">300</span> px</span>
+                            </label>
+                            <input type="range" id="containerSize" class="parameter-slider" 
+                                   min="150" max="450" step="10" value="300">
+                            <p class="parameter-description">Size of the simulation container</p>
+                        </div>
+
+                        <div class="parameter-group">
+                            <label class="parameter-label">
+                                <span>Viscosity</span>
+                                <span class="parameter-value" id="viscosityValue">10</span>
+                            </label>
+                            <input type="range" id="viscosity" class="parameter-slider" 
+                                   min="1" max="50" step="1" value="10">
+                            <p class="parameter-description">Thickness and resistance to flow</p>
+                        </div>
+
+                        <!-- Info Panel -->
+                        <div class="info-panel">
+                            <h3>Current Conditions</h3>
+                            <div class="info-items">
+                                <div class="info-item">
+                                    <span class="info-label">Environment:</span>
+                                    <span class="info-value" id="environmentValue">Earth-like</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Dominant Force:</span>
+                                    <span class="info-value" id="dominantForceValue">Gravity</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Behavior:</span>
+                                    <span class="info-value" id="behaviorValue">Normal</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Visualization Panel -->
+                    <div class="visualization-panel card">
+                        <canvas id="fluidCanvas" width="600" height="600"></canvas>
+                        <div class="visualization-info">
+                            <div class="behavior-description" id="behaviorDescription">
+                                <strong>Earth Gravity:</strong> Fluid particles settle to the bottom due to gravity. Surface tension and viscosity work together with gravitational forces.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Notes -->
+                <div class="education-notes card">
+                    <h2>Understanding Fluid Behavior</h2>
+                    <div class="notes-grid">
+                        <div class="note-item">
+                            <h3>🌊 Surface Tension Effects</h3>
+                            <p><strong>On Earth:</strong> Gravity pulls fluid down, limiting surface tension effects to small scales (droplets, meniscus).</p>
+                            <p><strong>In Space:</strong> Without gravity, surface tension dominates, creating perfect spheres and enabling unique phenomena like water bridges.</p>
+                        </div>
+                        <div class="note-item">
+                            <h3>🌡️ Temperature Impact</h3>
+                            <p><strong>On Earth:</strong> Heat causes convection currents as warm fluid rises and cool fluid sinks.</p>
+                            <p><strong>In Space:</strong> No convection! Heat transfer happens only through conduction and radiation, making thermal management critical.</p>
+                        </div>
+                        <div class="note-item">
+                            <h3>📦 Container Interactions</h3>
+                            <p><strong>On Earth:</strong> Fluids settle at the bottom of containers due to gravity.</p>
+                            <p><strong>In Space:</strong> Fluids stick to container walls and can float freely, requiring special designs for fluid management.</p>
+                        </div>
+                        <div class="note-item">
+                            <h3>🥄 Viscosity Role</h3>
+                            <p><strong>On Earth:</strong> Viscosity resists flow, but gravity still pulls fluid downward.</p>
+                            <p><strong>In Space:</strong> Viscosity becomes more important as there's no gravity to overcome it, making mixing and separation different.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Fluids in Space Educational Tool | NASA Space Apps Challenge</p>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/simulation.js"></script>
+</body>
+</html>

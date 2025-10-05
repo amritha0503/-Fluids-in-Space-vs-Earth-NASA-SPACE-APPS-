@@ -1,0 +1,216 @@
+.visualization-page {
+  padding: 2rem 0 4rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+/* Scenario Selector */
+.scenario-selector {
+  margin-bottom: 2rem;
+}
+
+.scenario-selector h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-blue);
+}
+
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.scenario-btn {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.scenario-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(0, 191, 255, 0.3);
+  transform: translateY(-3px);
+}
+
+.scenario-btn.active {
+  background: rgba(0, 191, 255, 0.1);
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+}
+
+.scenario-btn h3 {
+  font-size: 1.1rem;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.scenario-btn p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+/* Visualization Controls */
+.viz-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.control-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  background: rgba(0, 191, 255, 0.1);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+  background: rgba(0, 191, 255, 0.2);
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+}
+
+/* Main Visualization */
+.main-visualization {
+  margin-bottom: 3rem;
+}
+
+/* Explanation Section */
+.explanation-section {
+  margin-bottom: 3rem;
+}
+
+.explanation-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.explanation-content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.explanation-column h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--accent-blue);
+}
+
+.explanation-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.explanation-column li {
+  padding: 0.8rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+}
+
+.explanation-column li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-blue);
+}
+
+.science-explanation {
+  padding: 1.5rem;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-purple);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.7;
+}
+
+.science-explanation strong {
+  color: var(--accent-purple);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Additional Info */
+.additional-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.applications-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.application-item {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.application-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(0, 191, 255, 0.3);
+  transform: translateY(-3px);
+}
+
+.application-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  color: white;
+}
+
+.application-item p {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .scenario-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .explanation-content {
+    grid-template-columns: 1fr;
+  }
+
+  .applications-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .viz-controls {
+    flex-direction: column;
+  }
+
+  .control-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

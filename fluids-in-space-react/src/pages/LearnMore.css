@@ -1,0 +1,391 @@
+.learn-more {
+  padding: 2rem 0 4rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+section {
+  margin-bottom: 4rem;
+}
+
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.section-description {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  font-size: 1.05rem;
+}
+
+/* Resources Section */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.resource-card {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.resource-icon {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 191, 255, 0.2), rgba(139, 92, 246, 0.2));
+  border-radius: 12px;
+  color: var(--accent-blue);
+}
+
+.resource-content {
+  flex: 1;
+}
+
+.resource-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
+}
+
+.resource-header h3 {
+  font-size: 1.2rem;
+  color: white;
+  margin: 0;
+}
+
+.resource-header svg {
+  color: var(--accent-blue);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.resource-card:hover .resource-header svg {
+  opacity: 1;
+}
+
+.resource-content p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+
+.resource-category {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  background: rgba(0, 191, 255, 0.1);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: var(--accent-blue);
+}
+
+/* Datasets Section */
+.datasets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.dataset-card {
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.dataset-card.selected {
+  border-color: var(--accent-blue);
+  background: rgba(0, 191, 255, 0.05);
+}
+
+.dataset-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+  color: white;
+}
+
+.dataset-card > p {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.dataset-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--accent-blue);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.3rem;
+}
+
+.dataset-parameters {
+  margin-bottom: 1.5rem;
+}
+
+.dataset-parameters strong {
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.parameter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.parameter-tag {
+  padding: 0.4rem 0.8rem;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--accent-purple);
+}
+
+.view-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 191, 255, 0.4);
+}
+
+.dataset-viewer-container {
+  margin-top: 2rem;
+}
+
+/* Topics Section */
+.topics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.topic-card {
+  padding: 2rem;
+}
+
+.topic-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--accent-blue);
+}
+
+.topic-description {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.topic-examples strong {
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.topic-examples ul {
+  list-style: none;
+  padding: 0;
+}
+
+.topic-examples li {
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  position: relative;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.topic-examples li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent-purple);
+}
+
+/* Usage Section */
+.usage-section h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.usage-steps {
+  display: grid;
+  gap: 2rem;
+}
+
+.usage-step {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.step-number {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.step-content h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.step-content p {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+/* NASA Data Browser Section */
+.data-browser-section {
+  background: linear-gradient(135deg, rgba(11, 61, 145, 0.1), rgba(252, 61, 33, 0.05));
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 4rem;
+}
+
+.data-browser-section .section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.data-browser-section .section-header svg {
+  color: var(--accent-blue);
+}
+
+.data-browser-section .section-subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Additional Resources */
+.additional-resources h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.educator-content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.educator-column h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--accent-blue);
+}
+
+.educator-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.educator-column li {
+  padding: 0.8rem 0 0.8rem 1.5rem;
+  position: relative;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.educator-column li:last-child {
+  border-bottom: none;
+}
+
+.educator-column li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent-purple);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .topics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .educator-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .datasets-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .usage-step {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

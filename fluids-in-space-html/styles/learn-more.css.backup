@@ -1,0 +1,321 @@
+/* ===== LEARN MORE PAGE STYLES ===== */
+
+.learn-section {
+    padding: 2rem 0;
+}
+
+/* NASA Data Section */
+.nasa-data-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+}
+
+.section-icon {
+    font-size: 1.75rem;
+    margin-right: 0.5rem;
+}
+
+.section-description {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+/* Dataset Filters */
+.dataset-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: var(--darker-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.filter-info {
+    padding: 0.75rem 1rem;
+    background: rgba(74, 158, 255, 0.1);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius-md);
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Loading and Error States */
+.loading-state,
+.error-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+}
+
+.error-message {
+    color: var(--error);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.error-hint {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.error-hint a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.error-hint a:hover {
+    text-decoration: underline;
+}
+
+/* Datasets Grid */
+.datasets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.dataset-card {
+    background: #000000;
+    border: 1px solid #333;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.dataset-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(74, 158, 255, 0.3);
+    transform: translateY(-5px);
+}
+
+.dataset-header {
+    color: #4a9eff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+}
+
+.dataset-title {
+    color: #ffffff;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.dataset-description {
+    color: #cccccc;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.dataset-badges {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.relevance-badge,
+.category-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.relevance-badge {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.category-badge {
+    background: rgba(74, 158, 255, 0.2);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+/* Key Concepts Section */
+.concepts-section {
+    margin: 4rem 0;
+}
+
+.concepts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.concept-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    transition: var(--transition);
+}
+
+.concept-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 30px rgba(74, 158, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.concept-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.concept-card p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.concept-example {
+    padding: 1rem;
+    background: var(--darker-bg);
+    border-left: 3px solid var(--primary-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.concept-example strong {
+    color: var(--primary-color);
+}
+
+/* Applications Section */
+.applications-section {
+    margin: 4rem 0;
+    padding: 3rem;
+    background: linear-gradient(135deg, rgba(74, 158, 255, 0.05), rgba(124, 58, 237, 0.05));
+    border-radius: var(--radius-xl);
+}
+
+.applications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.application-item {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    transition: var(--transition);
+}
+
+.application-item:hover {
+    border-color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.app-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.app-content h4 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.app-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.9375rem;
+}
+
+/* Resources Section */
+.resources-section {
+    margin: 4rem 0;
+}
+
+.resources-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.resource-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: var(--transition);
+}
+
+.resource-link:hover {
+    border-color: var(--primary-color);
+    background: rgba(74, 158, 255, 0.05);
+    transform: translateX(5px);
+}
+
+.resource-icon {
+    font-size: 1.5rem;
+}
+
+.resource-text {
+    flex: 1;
+    font-weight: 600;
+}
+
+.external-icon {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dataset-filters {
+        flex-direction: column;
+    }
+    
+    .datasets-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .concepts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .application-item {
+        flex-direction: column;
+        text-align: center;
+    }
+}

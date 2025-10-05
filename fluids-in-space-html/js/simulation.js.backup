@@ -1,0 +1,325 @@
+// Fluid Simulation Engine
+document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('fluidCanvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    let animationId = null;
+    let isPaused = false;
+    let lastTime = Date.now();
+    let frameCount = 0;
+    
+    // Simulation parameters
+    const params = {
+        fluidType: 'water',
+        gravity: 9.8,
+        temperature: 25,
+        viscosity: 10,
+        surfaceTension: 72,
+        containerSize: 300
+    };
+    
+    // Particles
+    let particles = [];
+    
+    // Canvas setup
+    function resizeCanvas() {
+        const container = canvas.parentElement;
+        const rect = container.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Initialize particles
+    function initParticles() {
+        particles = [];
+        const numParticles = params.fluidType === 'colloid' ? 80 : 50;
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        
+        for (let i = 0; i < numParticles; i++) {
+            particles.push({
+                x: centerX + (Math.random() - 0.5) * params.containerSize * 0.8,
+                y: centerY + (Math.random() - 0.5) * params.containerSize * 0.8,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2,
+                radius: params.fluidType === 'colloid' ? 3 : 5,
+                mass: 1
+            });
+        }
+        
+        updateParticleCount();
+    }
+    
+    // Get fluid color
+    function getFluidColor() {
+        switch (params.fluidType) {
+            case 'water': return 'rgba(0, 191, 255, 0.8)';
+            case 'oil': return 'rgba(255, 165, 0, 0.8)';
+            case 'colloid': return 'rgba(139, 92, 246, 0.8)';
+            default: return 'rgba(0, 191, 255, 0.8)';
+        }
+    }
+    
+    // Update observation text
+    function updateObservations() {
+        const observationText = document.getElementById('observationText');
+        if (!observationText) return;
+        
+        let text = '';
+        
+        if (params.gravity < 1) {
+            text = '🚀 In microgravity, surface tension dominates! Particles cluster together forming sphere-like shapes. This is how water behaves on the ISS.';
+        } else if (params.gravity > 8) {
+            text = '🌍 On Earth, gravity pulls particles downward. You can see them settling at the bottom of the container, just like water in a glass.';
+        } else {
+            text = '🌓 In reduced gravity (like on Moon or Mars), you see a mix of behaviors. Some settling occurs, but surface tension still plays a significant role.';
+        }
+        
+        if (params.temperature > 60) {
+            text += ' High temperature increases molecular motion, making the fluid more active.';
+        }
+        
+        if (params.viscosity > 30) {
+            text += ' High viscosity slows down the fluid motion, like thick honey compared to water.';
+        }
+        
+        observationText.textContent = text;
+    }
+    
+    // Animation loop
+    function animate() {
+        if (isPaused) {
+            animationId = requestAnimationFrame(animate);
+            return;
+        }
+        
+        // Clear canvas
+        ctx.fillStyle = 'rgba(6, 9, 24, 0.3)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw container
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(
+            centerX - params.containerSize / 2,
+            centerY - params.containerSize / 2,
+            params.containerSize,
+            params.containerSize
+        );
+        
+        // Container boundaries
+        const left = centerX - params.containerSize / 2;
+        const right = centerX + params.containerSize / 2;
+        const top = centerY - params.containerSize / 2;
+        const bottom = centerY + params.containerSize / 2;
+        
+        // Update particles
+        const color = getFluidColor();
+        
+        particles.forEach((particle, i) => {
+            // Apply gravity
+            particle.vy += params.gravity * 0.01;
+            
+            // Temperature effect (random motion)
+            const tempFactor = params.temperature / 50;
+            particle.vx += (Math.random() - 0.5) * tempFactor * 0.1;
+            particle.vy += (Math.random() - 0.5) * tempFactor * 0.1;
+            
+            // Viscosity dampening
+            const dampening = 1 - params.viscosity * 0.02;
+            particle.vx *= dampening;
+            particle.vy *= dampening;
+            
+            // Surface tension (in low gravity)
+            if (params.gravity < 2) {
+                const dx = centerX - particle.x;
+                const dy = centerY - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance > 0) {
+                    const force = params.surfaceTension * 0.001;
+                    particle.vx += (dx / distance) * force;
+                    particle.vy += (dy / distance) * force;
+                }
+            }
+            
+            // Update position
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            
+            // Collision with container walls
+            if (particle.x - particle.radius < left) {
+                particle.x = left + particle.radius;
+                particle.vx *= -0.8;
+            }
+            if (particle.x + particle.radius > right) {
+                particle.x = right - particle.radius;
+                particle.vx *= -0.8;
+            }
+            if (particle.y - particle.radius < top) {
+                particle.y = top + particle.radius;
+                particle.vy *= -0.8;
+            }
+            if (particle.y + particle.radius > bottom) {
+                particle.y = bottom - particle.radius;
+                particle.vy *= -0.8;
+            }
+            
+            // Particle-particle collisions
+            for (let j = i + 1; j < particles.length; j++) {
+                const other = particles[j];
+                const dx = other.x - particle.x;
+                const dy = other.y - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const minDist = particle.radius + other.radius;
+                
+                if (distance < minDist) {
+                    // Simple elastic collision
+                    const angle = Math.atan2(dy, dx);
+                    const sin = Math.sin(angle);
+                    const cos = Math.cos(angle);
+                    
+                    // Separate particles
+                    const overlap = minDist - distance;
+                    particle.x -= overlap * cos * 0.5;
+                    particle.y -= overlap * sin * 0.5;
+                    other.x += overlap * cos * 0.5;
+                    other.y += overlap * sin * 0.5;
+                    
+                    // Exchange velocities (simplified)
+                    const tempVx = particle.vx;
+                    const tempVy = particle.vy;
+                    particle.vx = other.vx * 0.9;
+                    particle.vy = other.vy * 0.9;
+                    other.vx = tempVx * 0.9;
+                    other.vy = tempVy * 0.9;
+                }
+            }
+            
+            // Draw particle
+            ctx.beginPath();
+            ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            
+            // Add glow in low gravity
+            if (params.gravity < 2) {
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = color;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        });
+        
+        // Update FPS
+        frameCount++;
+        const currentTime = Date.now();
+        if (currentTime - lastTime >= 1000) {
+            document.getElementById('fps').textContent = frameCount;
+            frameCount = 0;
+            lastTime = currentTime;
+        }
+        
+        animationId = requestAnimationFrame(animate);
+    }
+    
+    // Control event listeners
+    document.getElementById('fluidType').addEventListener('change', (e) => {
+        params.fluidType = e.target.value;
+        initParticles();
+        updateObservations();
+    });
+    
+    document.getElementById('gravity').addEventListener('input', (e) => {
+        params.gravity = parseFloat(e.target.value);
+        document.getElementById('gravityValue').textContent = params.gravity.toFixed(1);
+        updateObservations();
+    });
+    
+    document.getElementById('temperature').addEventListener('input', (e) => {
+        params.temperature = parseInt(e.target.value);
+        document.getElementById('temperatureValue').textContent = params.temperature;
+        updateObservations();
+    });
+    
+    document.getElementById('viscosity').addEventListener('input', (e) => {
+        params.viscosity = parseInt(e.target.value);
+        document.getElementById('viscosityValue').textContent = params.viscosity;
+        updateObservations();
+    });
+    
+    document.getElementById('surfaceTension').addEventListener('input', (e) => {
+        params.surfaceTension = parseInt(e.target.value);
+        document.getElementById('surfaceTensionValue').textContent = params.surfaceTension;
+    });
+    
+    document.getElementById('containerSize').addEventListener('input', (e) => {
+        params.containerSize = parseInt(e.target.value);
+        document.getElementById('containerSizeValue').textContent = params.containerSize;
+    });
+    
+    document.getElementById('resetBtn').addEventListener('click', () => {
+        initParticles();
+    });
+    
+    document.getElementById('pauseBtn').addEventListener('click', (e) => {
+        isPaused = !isPaused;
+        e.target.textContent = isPaused ? 'Resume' : 'Pause';
+    });
+    
+    // Preset buttons
+    document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const preset = btn.dataset.preset;
+            
+            switch (preset) {
+                case 'earth':
+                    params.gravity = 9.8;
+                    params.temperature = 25;
+                    params.viscosity = 10;
+                    params.surfaceTension = 72;
+                    break;
+                case 'space':
+                    params.gravity = 0;
+                    params.temperature = 20;
+                    params.viscosity = 10;
+                    params.surfaceTension = 72;
+                    break;
+                case 'iss':
+                    params.gravity = 0.1;
+                    params.temperature = 22;
+                    params.viscosity = 10;
+                    params.surfaceTension = 72;
+                    break;
+            }
+            
+            // Update UI
+            document.getElementById('gravity').value = params.gravity;
+            document.getElementById('gravityValue').textContent = params.gravity.toFixed(1);
+            document.getElementById('temperature').value = params.temperature;
+            document.getElementById('temperatureValue').textContent = params.temperature;
+            document.getElementById('viscosity').value = params.viscosity;
+            document.getElementById('viscosityValue').textContent = params.viscosity;
+            document.getElementById('surfaceTension').value = params.surfaceTension;
+            document.getElementById('surfaceTensionValue').textContent = params.surfaceTension;
+            
+            updateObservations();
+        });
+    });
+    
+    function updateParticleCount() {
+        document.getElementById('particleCount').textContent = particles.length;
+    }
+    
+    // Start simulation
+    initParticles();
+    updateObservations();
+    animate();
+});

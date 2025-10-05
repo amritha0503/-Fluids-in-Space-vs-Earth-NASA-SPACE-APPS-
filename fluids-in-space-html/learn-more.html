@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More - Fluids in Space</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/learn-more.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="nav-icon">💧</span>
+                <span class="nav-title">Fluids in Space</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="simulation.html" class="nav-link">Simulation</a></li>
+                <li><a href="visualization.html" class="nav-link">Visualization</a></li>
+                <li><a href="learn-more.html" class="nav-link active">Learn More</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="learn-more">
+            <div class="container">
+                <!-- Header -->
+                <div class="page-header">
+                    <h1 class="section-title">Learn More</h1>
+                    <p class="section-subtitle">Explore NASA datasets, research papers, and educational resources</p>
+                </div>
+
+                <!-- NASA Data Browser -->
+                <section class="nasa-data-browser">
+                    <div class="browser-header">
+                        <div class="header-icon">🗄️</div>
+                        <h2>Browse NASA's Open Science Data Repository</h2>
+                        <p>Explore real experimental data from NASA space missions. Search for fluid behavior, microgravity, and physical science experiments conducted aboard the International Space Station.</p>
+                    </div>
+
+                    <div class="search-bar">
+                        <span class="search-icon">🔍</span>
+                        <input
+                            type="text"
+                            id="datasetSearch"
+                            placeholder="Search fluid mechanics experiments (e.g., capillary, Marangoni, colloid)..."
+                        />
+                        <button id="refreshData" class="refresh-btn" title="Refresh data">↻</button>
+                    </div>
+
+                    <div class="filter-info" id="filterInfo" style="display: none;">
+                        <span class="filter-icon">⚙️</span>
+                        <span id="filterInfoText"></span>
+                    </div>
+
+                    <div class="browser-content">
+                        <div class="datasets-list" id="datasetsList">
+                            <div class="loading-state">
+                                <div class="spinner"></div>
+                                <p>Loading NASA datasets...</p>
+                            </div>
+                        </div>
+
+                        <div class="dataset-details-panel" id="detailsPanel">
+                            <div class="details-placeholder">
+                                <div class="placeholder-icon">🗄️</div>
+                                <p>Select a dataset to view details</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- NASA Resources -->
+                <section class="resources-section">
+                    <h2>NASA Resources & Databases</h2>
+                    <div class="resources-grid">
+                        <a href="https://psi.nasa.gov/" target="_blank" rel="noopener noreferrer" class="resource-card card">
+                            <div class="resource-icon">🗄️</div>
+                            <div class="resource-content">
+                                <div class="resource-header">
+                                    <h3>Physical Sciences Informatics (PSI)</h3>
+                                    <span class="external-icon">↗</span>
+                                </div>
+                                <p>NASA's comprehensive database of physical sciences research conducted in space</p>
+                                <span class="resource-category">Database</span>
+                            </div>
+                        </a>
+
+                        <a href="https://www.nasa.gov/mission_pages/station/research/experiments/explorer/" target="_blank" rel="noopener noreferrer" class="resource-card card">
+                            <div class="resource-icon">📄</div>
+                            <div class="resource-content">
+                                <div class="resource-header">
+                                    <h3>Colloid Research on ISS</h3>
+                                    <span class="external-icon">↗</span>
+                                </div>
+                                <p>Studies on colloidal self-assembly and phase transitions in microgravity</p>
+                                <span class="resource-category">Research</span>
+                            </div>
+                        </a>
+
+                        <a href="resources/PSI-119_Marangoni_swimmer.pdf" target="_blank" class="resource-card card">
+                            <div class="resource-icon">📄</div>
+                            <div class="resource-content">
+                                <div class="resource-header">
+                                    <h3>PSI-119: Marangoni Swimmer & Particle Raft</h3>
+                                    <span class="external-icon">↗</span>
+                                </div>
+                                <p>Research on Marangoni swimmers pushing particle rafts in microgravity - Real NASA PSI experiment data</p>
+                                <span class="resource-category">Research Paper</span>
+                            </div>
+                        </a>
+
+                        <a href="https://www.nasa.gov/mission_pages/station/research/" target="_blank" rel="noopener noreferrer" class="resource-card card">
+                            <div class="resource-icon">📄</div>
+                            <div class="resource-content">
+                                <div class="resource-header">
+                                    <h3>Marangoni Convection Experiments</h3>
+                                    <span class="external-icon">↗</span>
+                                </div>
+                                <p>Surface tension-driven convection studies from space experiments</p>
+                                <span class="resource-category">Research</span>
+                            </div>
+                        </a>
+
+                        <a href="https://www.nasa.gov/audience/foreducators/" target="_blank" rel="noopener noreferrer" class="resource-card card">
+                            <div class="resource-icon">🎥</div>
+                            <div class="resource-content">
+                                <div class="resource-header">
+                                    <h3>Fluids in Space - Educational Videos</h3>
+                                    <span class="external-icon">↗</span>
+                                </div>
+                                <p>NASA astronauts demonstrating fluid behavior on the ISS</p>
+                                <span class="resource-category">Educational</span>
+                            </div>
+                        </a>
+
+                        <a href="https://www.nasa.gov/centers/glenn/about/fs21grc.html" target="_blank" rel="noopener noreferrer" class="resource-card card">
+                            <div class="resource-icon">📖</div>
+                            <div class="resource-content">
+                                <div class="resource-header">
+                                    <h3>Microgravity Science Primer</h3>
+                                    <span class="external-icon">↗</span>
+                                </div>
+                                <p>Introduction to fundamental physics in space environments</p>
+                                <span class="resource-category">Educational</span>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Available Datasets -->
+                <section class="datasets-section">
+                    <h2>Available NASA PSI Datasets</h2>
+                    <p class="section-description">
+                        These datasets contain real experimental data from space missions. 
+                        Click on any dataset to explore sample visualizations.
+                    </p>
+                    
+                    <div class="datasets-grid">
+                        <div class="dataset-card card" data-dataset="colloid">
+                            <h3>Colloid Self-Assembly Dataset</h3>
+                            <p>Particle tracking data from colloidal suspension experiments in microgravity</p>
+                            
+                            <div class="dataset-stats">
+                                <div class="stat">
+                                    <span class="stat-value">12</span>
+                                    <span class="stat-label">Experiments</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">50K</span>
+                                    <span class="stat-label">Data Points</span>
+                                </div>
+                            </div>
+
+                            <div class="dataset-parameters">
+                                <strong>Parameters:</strong>
+                                <div class="parameter-tags">
+                                    <span class="parameter-tag">Particle Position</span>
+                                    <span class="parameter-tag">Time</span>
+                                    <span class="parameter-tag">Temperature</span>
+                                    <span class="parameter-tag">Particle Size</span>
+                                </div>
+                            </div>
+
+                            <button class="view-btn">View Sample Data</button>
+                        </div>
+
+                        <div class="dataset-card card" data-dataset="marangoni">
+                            <h3>Marangoni Convection Data</h3>
+                            <p>Temperature gradients and flow velocity measurements</p>
+                            
+                            <div class="dataset-stats">
+                                <div class="stat">
+                                    <span class="stat-value">8</span>
+                                    <span class="stat-label">Experiments</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">30K</span>
+                                    <span class="stat-label">Data Points</span>
+                                </div>
+                            </div>
+
+                            <div class="dataset-parameters">
+                                <strong>Parameters:</strong>
+                                <div class="parameter-tags">
+                                    <span class="parameter-tag">Temperature</span>
+                                    <span class="parameter-tag">Flow Velocity</span>
+                                    <span class="parameter-tag">Surface Tension</span>
+                                    <span class="parameter-tag">Time</span>
+                                </div>
+                            </div>
+
+                            <button class="view-btn">View Sample Data</button>
+                        </div>
+
+                        <div class="dataset-card card" data-dataset="capillary">
+                            <h3>Capillary Flow Experiments</h3>
+                            <p>Fluid behavior in narrow tubes under various gravity levels</p>
+                            
+                            <div class="dataset-stats">
+                                <div class="stat">
+                                    <span class="stat-value">15</span>
+                                    <span class="stat-label">Experiments</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">40K</span>
+                                    <span class="stat-label">Data Points</span>
+                                </div>
+                            </div>
+
+                            <div class="dataset-parameters">
+                                <strong>Parameters:</strong>
+                                <div class="parameter-tags">
+                                    <span class="parameter-tag">Fluid Height</span>
+                                    <span class="parameter-tag">Contact Angle</span>
+                                    <span class="parameter-tag">Gravity Level</span>
+                                    <span class="parameter-tag">Time</span>
+                                </div>
+                            </div>
+
+                            <button class="view-btn">View Sample Data</button>
+                        </div>
+                    </div>
+
+                    <!-- Dataset Viewer - appears below dataset cards when one is selected -->
+                    <div class="dataset-viewer-container" id="datasetViewerContainer" style="display: none;">
+                        <div class="dataset-viewer card">
+                            <div class="viewer-header">
+                                <h3 id="chartTitle">Data Visualization</h3>
+                                <div class="chart-controls">
+                                    <button class="chart-type-btn active" data-type="line">Line Chart</button>
+                                    <button class="chart-type-btn" data-type="scatter">Scatter Plot</button>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="datasetCanvas" width="900" height="450"></canvas>
+                            </div>
+                            <div class="data-info">
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <span class="info-label">Data Points:</span>
+                                        <span class="info-value" id="dataPointsCount">100</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Source:</span>
+                                        <span class="info-value">NASA PSI Database</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <span class="info-label">Type:</span>
+                                        <span class="info-value">Sample Data</span>
+                                    </div>
+                                </div>
+                                <p class="data-note">
+                                    <strong>Note:</strong> This is simulated data for educational purposes. 
+                                    Real NASA datasets are available through the Physical Sciences Informatics (PSI) portal.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Key Topics -->
+                <section class="topics-section">
+                    <h2>Key Scientific Topics</h2>
+                    <div class="topics-grid">
+                        <div class="topic-card card">
+                            <h3>Surface Tension</h3>
+                            <p class="topic-description">The cohesive force between liquid molecules at the surface</p>
+                            <div class="topic-examples">
+                                <strong>Examples:</strong>
+                                <ul>
+                                    <li>Water droplets forming spheres</li>
+                                    <li>Insects walking on water</li>
+                                    <li>Capillary action in plants</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="topic-card card">
+                            <h3>Microgravity</h3>
+                            <p class="topic-description">Environment where gravitational force is greatly reduced</p>
+                            <div class="topic-examples">
+                                <strong>Examples:</strong>
+                                <ul>
+                                    <li>International Space Station orbit</li>
+                                    <li>Parabolic flight experiments</li>
+                                    <li>Drop tower facilities</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="topic-card card">
+                            <h3>Marangoni Effect</h3>
+                            <p class="topic-description">Mass transfer along an interface due to surface tension gradients</p>
+                            <div class="topic-examples">
+                                <strong>Examples:</strong>
+                                <ul>
+                                    <li>Wine tears on glass</li>
+                                    <li>Crystal growth in space</li>
+                                    <li>Welding defects prevention</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="topic-card card">
+                            <h3>Colloidal Systems</h3>
+                            <p class="topic-description">Mixtures where particles (1-1000nm) are dispersed in a medium</p>
+                            <div class="topic-examples">
+                                <strong>Examples:</strong>
+                                <ul>
+                                    <li>Milk and fog</li>
+                                    <li>Paints and inks</li>
+                                    <li>Blood and gelatin</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- How to Use This Tool -->
+                <section class="usage-section card">
+                    <h2>How to Use This Educational Tool</h2>
+                    <div class="usage-steps">
+                        <div class="usage-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Start with the Basics</h3>
+                                <p>Visit the Home page to understand fundamental concepts of fluid behavior in different gravitational environments.</p>
+                            </div>
+                        </div>
+
+                        <div class="usage-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Experiment with Parameters</h3>
+                                <p>Use the Simulation page to adjust gravity, temperature, and other parameters. Try the quick presets to jump between Earth, Moon, Mars, and ISS conditions.</p>
+                            </div>
+                        </div>
+
+                        <div class="usage-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Compare Behaviors</h3>
+                                <p>Explore the Visualization page to see side-by-side comparisons of different scenarios, from water droplets to colloid self-assembly.</p>
+                            </div>
+                        </div>
+
+                        <div class="usage-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Dive Deeper</h3>
+                                <p>Access NASA's real datasets and research papers to explore actual experimental data and learn more about space science research.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- For Educators & Students -->
+                <section class="additional-resources card">
+                    <h2>For Educators & Students</h2>
+                    <div class="educator-content">
+                        <div class="educator-column">
+                            <h3>📚 Suggested Activities</h3>
+                            <ul>
+                                <li>Compare Earth vs space conditions for different fluids</li>
+                                <li>Predict outcomes before running simulations</li>
+                                <li>Research real ISS experiments and match with simulations</li>
+                                <li>Create presentations on Marangoni convection applications</li>
+                                <li>Design hypothetical space experiments</li>
+                            </ul>
+                        </div>
+
+                        <div class="educator-column">
+                            <h3>🎯 Learning Objectives</h3>
+                            <ul>
+                                <li>Understand gravitational effects on fluids</li>
+                                <li>Explain surface tension and capillary action</li>
+                                <li>Describe Marangoni convection phenomena</li>
+                                <li>Analyze real space science data</li>
+                                <li>Apply physics concepts to space exploration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Fluids in Space Educational Tool | NASA Space Apps Challenge</p>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/learn-more.js"></script>
+</body>
+</html>

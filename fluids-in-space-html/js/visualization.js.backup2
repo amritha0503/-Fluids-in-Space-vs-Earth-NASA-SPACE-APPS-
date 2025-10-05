@@ -1,0 +1,280 @@
+// Visualization - React Match
+document.addEventListener('DOMContentLoaded', () => {
+    const earthCanvas = document.getElementById('earthCanvas');
+    const spaceCanvas = document.getElementById('spaceCanvas');
+    const explanationCard = document.getElementById('explanationCard');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    
+    if (!earthCanvas || !spaceCanvas || !explanationCard) return;
+    
+    let isPlaying = true;
+    let currentScenario = 'droplet';
+    
+    // Scenario explanations matching React
+    const scenarios = {
+        droplet: {
+            title: '🌊 Water Droplet Formation',
+            earth: {
+                heading: 'On Earth 🌍',
+                points: [
+                    'Gravity pulls water downward',
+                    'Water takes the shape of its container',
+                    'Flat surfaces form at the top',
+                    'Droplets are tear-shaped when falling'
+                ]
+            },
+            space: {
+                heading: 'In Space 🚀',
+                points: [
+                    'Surface tension dominates behavior',
+                    'Water forms perfect spheres',
+                    'No "up" or "down" orientation',
+                    'Spheres float freely without falling'
+                ]
+            },
+            physics: 'Surface tension is the result of cohesive forces between liquid molecules. On Earth, gravity overcomes this force. In microgravity, surface tension pulls the liquid into the shape with minimum surface area—a sphere. This is why astronauts\' water forms floating balls!'
+        },
+        convection: {
+            title: '🌡️ Marangoni Convection',
+            earth: {
+                heading: 'On Earth 🌍',
+                points: [
+                    'Hot fluid rises, cold fluid sinks',
+                    'Buoyancy-driven convection',
+                    'Predictable circulation patterns',
+                    'Gravity dominates the flow'
+                ]
+            },
+            space: {
+                heading: 'In Space 🚀',
+                points: [
+                    'Surface tension gradients drive flow',
+                    'Temperature affects surface tension',
+                    'Complex, unexpected patterns',
+                    'Flow from hot to cold regions on surface'
+                ]
+            },
+            physics: 'Marangoni convection occurs when surface tension varies across a liquid\'s surface (due to temperature or concentration differences). In microgravity, this becomes the primary heat transfer mechanism. This effect is crucial for materials processing in space and affects everything from crystal growth to welding operations.'
+        },
+        colloid: {
+            title: '⚛️ Colloid Self-Assembly',
+            earth: {
+                heading: 'On Earth 🌍',
+                points: [
+                    'Particles settle due to gravity',
+                    'Sedimentation prevents organization',
+                    'Density differences cause separation',
+                    'Limited crystal formation'
+                ]
+            },
+            space: {
+                heading: 'In Space 🚀',
+                points: [
+                    'Particles remain suspended indefinitely',
+                    'Self-organize into crystal structures',
+                    'Long-range order develops',
+                    'Unique materials can form'
+                ]
+            },
+            physics: 'Colloids are mixtures with particles sized between 1-1000 nanometers. On Earth, gravity causes these particles to settle. In microgravity, colloidal particles can spontaneously organize into ordered structures called "colloidal crystals." These structures have potential applications in photonics, sensors, and advanced materials. NASA\'s Physical Sciences Informatics (PSI) database contains extensive research on colloidal behavior in space.'
+        },
+        mixing: {
+            title: '🌀 Fluid Mixing',
+            earth: {
+                heading: 'On Earth 🌍',
+                points: [
+                    'Density differences drive mixing',
+                    'Stirring creates turbulent flow',
+                    'Heavier fluids sink naturally',
+                    'Convection assists mixing'
+                ]
+            },
+            space: {
+                heading: 'In Space 🚀',
+                points: [
+                    'No natural density-driven mixing',
+                    'Requires active stirring/agitation',
+                    'Fluids can remain separate',
+                    'Different mixing strategies needed'
+                ]
+            },
+            physics: 'Without gravity, fluids of different densities don\'t automatically separate or mix. This presents unique challenges for space operations like fuel management, life support systems, and food preparation. Astronauts must use special techniques to mix drinks and manage water supplies. Understanding microgravity mixing is essential for long-duration space missions.'
+        }
+    };
+    
+    // Update explanation card
+    function updateExplanation(scenario) {
+        const data = scenarios[scenario];
+        explanationCard.innerHTML = `
+            <h2>${data.title}</h2>
+            <div class="explanation-content">
+                <div class="explanation-column">
+                    <h3>${data.earth.heading}</h3>
+                    <ul>
+                        ${data.earth.points.map(point => `<li>${point}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="explanation-column">
+                    <h3>${data.space.heading}</h3>
+                    <ul>
+                        ${data.space.points.map(point => `<li>${point}</li>`).join('')}
+                    </ul>
+                </div>
+            </div>
+            <div class="science-explanation">
+                <strong>The Physics:</strong> ${data.physics}
+            </div>
+        `;
+    }
+    
+    // Canvas animations for scenarios
+    let earthParticles = [];
+    let spaceParticles = [];
+    
+    function initParticles(scenario) {
+        earthParticles = [];
+        spaceParticles = [];
+        
+        const numParticles = scenario === 'colloid' ? 30 : 20;
+        
+        for (let i = 0; i < numParticles; i++) {
+            earthParticles.push({
+                x: Math.random() * earthCanvas.width,
+                y: Math.random() * earthCanvas.height * 0.3,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: 0,
+                radius: scenario === 'colloid' ? 3 : 5
+            });
+            
+            spaceParticles.push({
+                x: Math.random() * spaceCanvas.width,
+                y: Math.random() * spaceCanvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                radius: scenario === 'colloid' ? 3 : 5
+            });
+        }
+    }
+    
+    // Animation loop
+    function animate() {
+        if (!isPlaying) {
+            requestAnimationFrame(animate);
+            return;
+        }
+        
+        const earthCtx = earthCanvas.getContext('2d');
+        const spaceCtx = spaceCanvas.getContext('2d');
+        
+        // Clear canvases
+        earthCtx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+        earthCtx.fillRect(0, 0, earthCanvas.width, earthCanvas.height);
+        spaceCtx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+        spaceCtx.fillRect(0, 0, spaceCanvas.width, spaceCanvas.height);
+        
+        // Earth behavior - gravity dominates
+        earthParticles.forEach(p => {
+            p.vy += 0.15; // gravity
+            p.y += p.vy;
+            p.x += p.vx;
+            
+            // Bounce off bottom
+            if (p.y + p.radius > earthCanvas.height) {
+                p.y = earthCanvas.height - p.radius;
+                p.vy *= -0.5;
+            }
+            
+            // Bounce off sides
+            if (p.x < p.radius || p.x > earthCanvas.width - p.radius) {
+                p.vx *= -1;
+            }
+            
+            // Draw particle
+            earthCtx.beginPath();
+            earthCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            earthCtx.fillStyle = 'rgba(0, 191, 255, 0.8)';
+            earthCtx.fill();
+        });
+        
+        // Space behavior - surface tension dominates
+        const centerX = spaceCanvas.width / 2;
+        const centerY = spaceCanvas.height / 2;
+        
+        spaceParticles.forEach((p, i) => {
+            // Pull towards center (surface tension effect)
+            const dx = centerX - p.x;
+            const dy = centerY - p.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance > 0) {
+                p.vx += (dx / distance) * 0.05;
+                p.vy += (dy / distance) * 0.05;
+            }
+            
+            // Dampening
+            p.vx *= 0.98;
+            p.vy *= 0.98;
+            
+            p.x += p.vx;
+            p.y += p.vy;
+            
+            // Draw particle
+            spaceCtx.beginPath();
+            spaceCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            spaceCtx.fillStyle = 'rgba(139, 92, 246, 0.8)';
+            spaceCtx.fill();
+            
+            // Draw connections
+            for (let j = i + 1; j < spaceParticles.length; j++) {
+                const other = spaceParticles[j];
+                const dist = Math.sqrt(
+                    Math.pow(p.x - other.x, 2) + Math.pow(p.y - other.y, 2)
+                );
+                
+                if (dist < 60) {
+                    spaceCtx.strokeStyle = `rgba(139, 92, 246, ${0.4 - dist / 150})`;
+                    spaceCtx.lineWidth = 1;
+                    spaceCtx.beginPath();
+                    spaceCtx.moveTo(p.x, p.y);
+                    spaceCtx.lineTo(other.x, other.y);
+                    spaceCtx.stroke();
+                }
+            }
+        });
+        
+        requestAnimationFrame(animate);
+    }
+    
+    // Scenario selector buttons
+    document.querySelectorAll('.scenario-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            currentScenario = btn.dataset.scenario;
+            updateExplanation(currentScenario);
+            initParticles(currentScenario);
+        });
+    });
+    
+    // Play/Pause button
+    playPauseBtn.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        playPauseBtn.innerHTML = isPlaying 
+            ? '<span class="btn-icon">⏸️</span><span class="btn-text">Pause</span>'
+            : '<span class="btn-icon">▶️</span><span class="btn-text">Play</span>';
+    });
+    
+    // Reset button
+    resetBtn.addEventListener('click', () => {
+        isPlaying = false;
+        initParticles(currentScenario);
+        setTimeout(() => { isPlaying = true; }, 100);
+    });
+    
+    // Initialize
+    updateExplanation(currentScenario);
+    initParticles(currentScenario);
+    animate();
+});

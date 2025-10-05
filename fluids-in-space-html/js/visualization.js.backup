@@ -1,0 +1,214 @@
+// Visualization and Comparison Charts
+document.addEventListener('DOMContentLoaded', () => {
+    const comparisonChart = document.getElementById('comparisonChart');
+    const earthCanvas = document.getElementById('earthCanvas');
+    const spaceCanvas = document.getElementById('spaceCanvas');
+    
+    if (!comparisonChart) return;
+    
+    let currentComparison = 'surface-tension';
+    let chartInstance = null;
+    
+    // Comparison data
+    const comparisonData = {
+        'surface-tension': {
+            labels: ['Water', 'Oil', 'Ethanol', 'Mercury', 'Glycerol'],
+            earth: [72, 25, 22, 486, 63],
+            space: [72, 25, 22, 486, 63], // Same values, behavior changes
+            unit: 'mN/m',
+            title: 'Surface Tension Comparison'
+        },
+        'viscosity': {
+            labels: ['Water', 'Oil', 'Honey', 'Glycerol', 'Air'],
+            earth: [1, 50, 10000, 1500, 0.02],
+            space: [1, 50, 10000, 1500, 0.02], // Viscosity doesn't change
+            unit: 'mPa·s',
+            title: 'Viscosity Effects'
+        },
+        'temperature': {
+            labels: ['0°C', '25°C', '50°C', '75°C', '100°C'],
+            earth: [75.6, 72.0, 67.9, 63.5, 58.9],
+            space: [75.6, 72.0, 67.9, 63.5, 58.9],
+            unit: 'mN/m (Water)',
+            title: 'Temperature Impact on Surface Tension'
+        }
+    };
+    
+    // Create chart
+    function createChart(type) {
+        const data = comparisonData[type];
+        const ctx = comparisonChart.getContext('2d');
+        
+        // Clear previous chart
+        if (chartInstance) {
+            ctx.clearRect(0, 0, comparisonChart.width, comparisonChart.height);
+        }
+        
+        // Simple bar chart implementation
+        const padding = 60;
+        const chartWidth = comparisonChart.width - padding * 2;
+        const chartHeight = comparisonChart.height - padding * 2;
+        const barWidth = chartWidth / (data.labels.length * 2.5);
+        const maxValue = Math.max(...data.earth, ...data.space);
+        
+        // Clear canvas
+        ctx.fillStyle = '#0a0e27';
+        ctx.fillRect(0, 0, comparisonChart.width, comparisonChart.height);
+        
+        // Title
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 20px "Segoe UI"';
+        ctx.textAlign = 'center';
+        ctx.fillText(data.title, comparisonChart.width / 2, 30);
+        
+        // Draw bars
+        data.labels.forEach((label, i) => {
+            const x = padding + (i * chartWidth / data.labels.length);
+            const earthValue = data.earth[i];
+            const spaceValue = data.space[i];
+            
+            // Earth bar (left)
+            const earthHeight = (earthValue / maxValue) * chartHeight;
+            ctx.fillStyle = '#4a9eff';
+            ctx.fillRect(x, comparisonChart.height - padding - earthHeight, barWidth * 0.8, earthHeight);
+            
+            // Space bar (right) - if different
+            if (type === 'surface-tension') {
+                // Show behavior difference with pattern
+                ctx.fillStyle = '#7c3aed';
+                ctx.fillRect(x + barWidth, comparisonChart.height - padding - earthHeight, barWidth * 0.8, earthHeight);
+            }
+            
+            // Label
+            ctx.fillStyle = '#a0aec0';
+            ctx.font = '12px "Segoe UI"';
+            ctx.textAlign = 'center';
+            ctx.fillText(label, x + barWidth, comparisonChart.height - padding + 20);
+            
+            // Value
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 10px "Segoe UI"';
+            ctx.fillText(earthValue + ' ' + data.unit, x + barWidth * 0.4, comparisonChart.height - padding - earthHeight - 5);
+        });
+        
+        // Legend
+        ctx.fillStyle = '#4a9eff';
+        ctx.fillRect(padding, comparisonChart.height - 20, 15, 15);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '12px "Segoe UI"';
+        ctx.textAlign = 'left';
+        ctx.fillText('Earth', padding + 20, comparisonChart.height - 8);
+        
+        if (type === 'surface-tension') {
+            ctx.fillStyle = '#7c3aed';
+            ctx.fillRect(padding + 80, comparisonChart.height - 20, 15, 15);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText('Space (behavior differs)', padding + 100, comparisonChart.height - 8);
+        }
+    }
+    
+    // Side-by-side canvas animations
+    function animateEnvironment(canvas, isEarth) {
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+        
+        const particles = [];
+        const numParticles = 20;
+        
+        // Initialize particles
+        for (let i = 0; i < numParticles; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: isEarth ? Math.random() * height * 0.3 : Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: isEarth ? Math.random() * 2 : (Math.random() - 0.5) * 0.5,
+                radius: 4
+            });
+        }
+        
+        function animate() {
+            // Clear with fade
+            ctx.fillStyle = 'rgba(6, 9, 24, 0.2)';
+            ctx.fillRect(0, 0, width, height);
+            
+            particles.forEach((p, i) => {
+                if (isEarth) {
+                    // Earth: particles fall
+                    p.vy += 0.1; // gravity
+                    p.y += p.vy;
+                    
+                    // Reset if off screen
+                    if (p.y > height) {
+                        p.y = -10;
+                        p.vy = 0;
+                    }
+                } else {
+                    // Space: particles cluster in center
+                    const centerX = width / 2;
+                    const centerY = height / 2;
+                    const dx = centerX - p.x;
+                    const dy = centerY - p.y;
+                    
+                    p.vx += dx * 0.0005;
+                    p.vy += dy * 0.0005;
+                    
+                    // Dampening
+                    p.vx *= 0.98;
+                    p.vy *= 0.98;
+                    
+                    p.x += p.vx;
+                    p.y += p.vy;
+                }
+                
+                // Draw particle
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = isEarth ? 'rgba(74, 158, 255, 0.8)' : 'rgba(124, 58, 237, 0.8)';
+                ctx.fill();
+                
+                // Draw connections in space
+                if (!isEarth) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const other = particles[j];
+                        const distance = Math.sqrt(
+                            Math.pow(p.x - other.x, 2) + Math.pow(p.y - other.y, 2)
+                        );
+                        
+                        if (distance < 80) {
+                            ctx.strokeStyle = `rgba(124, 58, 237, ${0.3 - distance / 300})`;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(other.x, other.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            });
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+    }
+    
+    // Comparison selector
+    document.querySelectorAll('.selector-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.selector-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            currentComparison = btn.dataset.comparison;
+            createChart(currentComparison);
+        });
+    });
+    
+    // Initialize
+    createChart(currentComparison);
+    
+    if (earthCanvas && spaceCanvas) {
+        animateEnvironment(earthCanvas, true);
+        animateEnvironment(spaceCanvas, false);
+    }
+});

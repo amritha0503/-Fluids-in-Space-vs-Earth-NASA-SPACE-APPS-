@@ -1,0 +1,67 @@
+{
+  "nasa_documents": [
+    {
+      "id": "psi-119",
+      "title": "PSI-119: Marangoni Swimmer Pushing Particle Raft",
+      "type": "research_paper",
+      "category": "Marangoni Effect",
+      "description": "Experimental study of Marangoni swimmers and their ability to push particle rafts in microgravity environments. This research demonstrates surface tension-driven propulsion mechanisms.",
+      "filename": "PSI-119_Marangoni_swimmer.pdf",
+      "url": "/resources/PSI-119_Marangoni_swimmer.pdf",
+      "source": "NASA Physical Sciences Informatics",
+      "experiment_location": "International Space Station",
+      "key_concepts": [
+        "Marangoni Effect",
+        "Surface Tension",
+        "Particle Dynamics",
+        "Microgravity Physics"
+      ],
+      "educational_level": ["High School", "Undergraduate", "Graduate"],
+      "related_simulations": ["marangoni_convection", "particle_raft"],
+      "data_available": false,
+      "date_added": "2025-10-04"
+    }
+  ],
+  "data_files": [
+    {
+      "id": "marangoni-sample",
+      "title": "Marangoni Convection Sample Data",
+      "description": "Sample dataset showing temperature-dependent surface tension measurements",
+      "filename": "sample_marangoni.json",
+      "type": "sample",
+      "parameters": ["temperature", "surface_tension", "flow_velocity"],
+      "data_points": 100,
+      "source": "Generated for educational purposes"
+    }
+  ],
+  "integration_instructions": {
+    "pdf_documents": {
+      "location": "public/resources/",
+      "supported_formats": [".pdf"],
+      "max_size": "50MB",
+      "instructions": "Copy PDF files to public/resources/ folder. They will be automatically accessible at /resources/filename.pdf"
+    },
+    "csv_data": {
+      "location": "preprocessing/raw_data/",
+      "supported_formats": [".csv", ".xlsx"],
+      "preprocessing": "Run python preprocess_nasa_data.py --input raw_data/file.csv --output ../src/data/processed.json --type [colloid|marangoni|capillary]"
+    },
+    "json_data": {
+      "location": "src/data/",
+      "supported_formats": [".json"],
+      "instructions": "Place processed JSON files in src/data/ and import them in React components"
+    }
+  },
+  "planned_additions": [
+    {
+      "title": "Colloidal Crystal Formation Data",
+      "status": "pending",
+      "source": "NASA PSI Database"
+    },
+    {
+      "title": "Capillary Flow Experiments",
+      "status": "pending",
+      "source": "ISS Research Archive"
+    }
+  ]
+}
