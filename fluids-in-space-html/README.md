@@ -11,19 +11,6 @@ This project helps students and educators understand how fluids behave different
 - 📊 **Data Visualization**: Side-by-side Earth vs Space comparisons
 - 📚 **Learn More**: Educational resources and NASA datasets
 
-## 🆚 React vs HTML Version
-
-### What Changed:
-
-| Feature | React Version | HTML Version |
-|---------|--------------|--------------|
-| **Framework** | React 18.2.0 + Router | Pure HTML/CSS/JS |
-| **Animation** | Framer Motion | Vanilla JS animations |
-| **Charts** | Recharts library | Custom Canvas implementation |
-| **State Management** | React hooks | Plain JavaScript |
-| **Routing** | React Router | Multiple HTML files |
-| **Build Process** | npm/webpack | None - direct browser |
-| **Dependencies** | ~10 packages | Zero dependencies |
 
 ### What's Preserved:
 
@@ -35,49 +22,6 @@ This project helps students and educators understand how fluids behave different
 ✅ Dark space theme  
 ✅ All visualizations  
 
-### Trade-offs:
-
-**Pros:**
-- ✅ No build process needed
-- ✅ Works on any web server
-- ✅ No npm/node required
-- ✅ Smaller file size
-- ✅ Easier to understand for beginners
-- ✅ Can open directly in browser
-
-**Cons:**
-- ❌ Less smooth animations (no Framer Motion)
-- ❌ Manual routing (page refreshes)
-- ❌ No chart library (custom implementation)
-- ❌ More code to maintain
-- ❌ Less modular structure
-
-## 📁 Project Structure
-
-```
-fluids-in-space-html/
-│
-├── index.html              # Home page
-├── simulation.html         # Interactive fluid simulation
-├── visualization.html      # Earth vs Space comparisons
-├── learn-more.html        # Educational resources
-│
-├── styles/
-│   ├── main.css           # Global styles & variables
-│   ├── home.css           # Home page styles
-│   ├── simulation.css     # Simulation page styles
-│   ├── visualization.css  # Visualization page styles
-│   └── learn-more.css     # Learn more page styles
-│
-├── js/
-│   ├── navigation.js      # Navigation & mobile menu
-│   ├── hero-animation.js  # Home page animation
-│   ├── simulation.js      # Fluid physics engine
-│   ├── visualization.js   # Charts & comparisons
-│   └── nasa-data.js       # NASA dataset browser
-│
-└── README.md              # This file
-```
 
 ## 🚀 How to Use
 
